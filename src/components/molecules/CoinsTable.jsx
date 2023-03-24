@@ -21,19 +21,11 @@ import { numberWithCommas } from "./Carousel";
 
 const CoinsTable = () => {
   const navigate = useNavigate();
-  const [coins, setCoins] = useState([]);
-  const [loading, setLoading] = useState(true);
+
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  const { currency, symbol } = CryptoState();
-
-  const fetchCoins = async () => {
-    const { data } = await axios.get(CoinList(currency));
-
-    setCoins(data);
-    setLoading(false);
-  };
+  const { currency, symbol, coins, loading, fetchCoins } = CryptoState();
 
   useEffect(() => {
     fetchCoins();

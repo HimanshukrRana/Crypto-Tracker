@@ -12,6 +12,8 @@ import React from "react";
 import { makeStyles } from "tss-react/mui";
 import { Link } from "react-router-dom";
 import { CryptoState } from "../../context";
+import AuthModal from "../Auth/AuthModal";
+import SideBar from "../Auth/SideBar";
 
 const useStyles = makeStyles()(() => {
   return {
@@ -41,7 +43,7 @@ const useStyles = makeStyles()(() => {
 function Header() {
   const { classes } = useStyles();
 
-  const { currency, setCurrency } = CryptoState();
+  const { currency, setCurrency, user } = CryptoState();
 
   return (
     <AppBar color="transparent" position="static">
@@ -67,6 +69,7 @@ function Header() {
               <MenuItem value={"USD"}>US</MenuItem>
             </Select>
           </FormControl>
+          {user ? <SideBar /> : <AuthModal />}
         </Toolbar>
       </Container>
     </AppBar>
