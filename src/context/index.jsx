@@ -1,8 +1,9 @@
 import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
+import { doc, onSnapshot } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { CoinList } from "../config/api";
 
 const initialValue = {};
@@ -20,6 +21,26 @@ const CryptoContext = ({ children }) => {
     type: "",
     message: "",
   });
+
+  const [watchlist, setWatchlist] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      const coinRef = doc(db, "watchlist", user.uid);
+
+      var unsubscribe = onSnapshot(coinRef, (coin) => {
+        if (coin.exists()) {
+          setWatchlist(coin.data().coins);
+        } else {
+          console.log("No items in Watchlist");
+        }
+      });
+
+      return () => {
+        unsubscribe();
+      };
+    }
+  }, [user]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -53,6 +74,7 @@ const CryptoContext = ({ children }) => {
         alert,
         setAlert,
         user,
+        watchlist,
       }}
     >
       {children}
