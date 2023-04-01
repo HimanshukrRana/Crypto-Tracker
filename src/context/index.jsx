@@ -18,7 +18,7 @@ const CryptoContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [alert, setAlert] = useState({
     open: false,
-    type: "",
+    type: "success",
     message: "",
   });
 

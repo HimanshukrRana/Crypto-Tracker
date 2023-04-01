@@ -85,7 +85,7 @@ const CoinsTable = () => {
                         fontSize: "20px",
                       }}
                       key={head}
-                      align={head === "Coin" ? "" : "right"}
+                      align={head === "Coin" ? "left" : "right"}
                     >
                       {head}
                     </TableCell>
