@@ -15,7 +15,7 @@ import { CryptoState } from "../../context";
 import AuthModal from "../Auth/AuthModal";
 import SideBar from "../Auth/SideBar";
 
-const useStyles = makeStyles()(() => {
+const useStyles = makeStyles()((theme) => {
   return {
     title: {
       flex: 1,
@@ -24,6 +24,9 @@ const useStyles = makeStyles()(() => {
       fontWeight: "bold",
       cursor: "pointer",
       fontSize: "30px",
+      [theme.breakpoints.down("md")]: {
+        fontSize: "15px",
+      },
     },
     select: {
       width: "120px",

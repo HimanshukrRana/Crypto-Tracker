@@ -3,7 +3,7 @@ import React from "react";
 import { makeStyles } from "tss-react/mui";
 import Carousel from "./Carousel";
 
-const useStyles = makeStyles()(() => {
+const useStyles = makeStyles()((theme) => {
   return {
     banner: {
       backgroundImage: "url(./banner2.jpg)",
@@ -23,6 +23,14 @@ const useStyles = makeStyles()(() => {
       justifyContent: "center",
       textAlign: "center",
     },
+    heading: {
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "15px",
+      },
+      [theme.breakpoints.down("md")]: {
+        fontSize: "45px",
+      },
+    },
   };
 });
 
@@ -35,6 +43,7 @@ const Banner = () => {
         <div className={classes.tagline}>
           <Typography
             variant="h2"
+            className={classes.heading}
             style={{
               fontWeight: "bold",
               marginBottom: 15,
